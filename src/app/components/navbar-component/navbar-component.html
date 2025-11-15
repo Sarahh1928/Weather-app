@@ -1,42 +1,62 @@
 <nav class="navbar navbar-expand-lg px-4 pt-3 pb-0">
-  <a class="navbar-brand fw-bold" routerLink="/">Weather App</a>
-
+  <a class="navbar-brand fw-bold" [ngStyle]="{'color': currentTheme === 'light' ? '#0b3d91' : '#f1f5f9'}"
+    routerLink="/">Weather App</a>
   <!-- Hamburger toggler -->
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-          aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation" 
-           [ngClass]="{'light-toggler': currentTheme === 'light', 'dark-toggler': currentTheme === 'dark'}">
+    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()"
+    [ngClass]="{'light-toggler': currentTheme === 'light', 'dark-toggler': currentTheme === 'dark','toggler-fixed': navbarOpen,'toggler-none': !navbarOpen}">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <!-- Collapsible menu -->
-  <div #navbarContent  class="collapse navbar-collapse justify-content-end" id="navbarContent" 
-  [ngClass]="{'nav-color-light': currentTheme === 'light', 'nav-color-dark': currentTheme === 'dark'}">
+  <div #navbarContent class="collapse navbar-collapse justify-content-end" id="navbarContent"
+    [ngClass]="{'nav-color-light': currentTheme === 'light', 'nav-color-dark': currentTheme === 'dark'}">
+
     <div class="btn-group me-3" role="group">
       <input type="date" class="form-control" (change)="onDateChange($event)" />
     </div>
 
     <div class="btn-group me-3" role="group" aria-label="Temperature Unit Toggle">
       <button type="button" class="btn btn-outline-light" [ngClass]="{'active': currentUnit === 'C'}"
-              (click)="setUnit('C')">°C</button>
+        (click)="setUnit('C')">°C</button>
       <button type="button" class="btn btn-outline-light" [ngClass]="{'active': currentUnit === 'F'}"
-              (click)="setUnit('F')">°F</button>
+        (click)="setUnit('F')">°F</button>
     </div>
+    <div class="d-flex align-items-center">
+      <button (click)="toggleTheme()"
+        class="btn btn-light d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm w-auto"
+        id="theme-switch">
+        <ng-container *ngIf="currentTheme === 'dark'; else lightIcon">
+          <!-- Sun Icon (Light Mode) -->
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" width="24px" viewBox="0 0 24 24">
+            <path fill="#ffc107"
+              d="M12 4.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15zm0-3v2.5m0 15V21m9-9h-2.5M5.5 12H3m15.364-6.364l-1.768 1.768M7.404 16.596l-1.768 1.768m12.728 0l-1.768-1.768M7.404 7.404L5.636 5.636" />
+          </svg>
+        </ng-container>
+        <ng-template #lightIcon>
+          <!-- Moon Icon (Dark Mode) -->
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" width="24px" viewBox="0 0 24 24">
+            <path fill="#0b3d91" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </ng-template>
+      </button>
 
-    <button (click)="toggleTheme()" class="btn btn-light d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm w-auto" id="theme-switch">
-      <ng-container *ngIf="currentTheme === 'dark'; else lightIcon">
-        <!-- Sun Icon (Light Mode) -->
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" width="24px" viewBox="0 0 24 24">
-          <path fill="#ffc107"
-            d="M12 4.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15zm0-3v2.5m0 15V21m9-9h-2.5M5.5 12H3m15.364-6.364l-1.768 1.768M7.404 16.596l-1.768 1.768m12.728 0l-1.768-1.768M7.404 7.404L5.636 5.636" />
-        </svg>
-      </ng-container>
-      <ng-template #lightIcon>
-        <!-- Moon Icon (Dark Mode) -->
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" width="24px" viewBox="0 0 24 24">
-          <path fill="#6c757d" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
-      </ng-template>
-    </button>
-
+      <button routerLink="/"
+        class="btn btn-light d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm w-auto ms-3"
+        title="Home" (click)="closeNavbar()">
+        <ng-container *ngIf="currentTheme === 'light'; else darkHome">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#0b3d91" viewBox="0 0 16 16">
+            <path d="M8 3.293l6 6V15h-4v-4H6v4H2v-5.707l6-6z" />
+            <path fill="none" d="M0 0h16v16H0z" />
+          </svg>
+        </ng-container>
+        <ng-template #darkHome>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#0d132b" viewBox="0 0 16 16">
+            <path d="M8 3.293l6 6V15h-4v-4H6v4H2v-5.707l6-6z" />
+            <path fill="none" d="M0 0h16v16H0z" />
+          </svg>
+        </ng-template>
+      </button>
+    </div>
   </div>
 </nav>

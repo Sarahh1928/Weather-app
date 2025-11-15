@@ -3,16 +3,23 @@ import { WeatherStateService } from '../../services/weather-state.service';
 
 @Component({
   selector: 'app-filters-component',
-  imports: [],
   templateUrl: './filters-component.html',
   styleUrl: './filters-component.css',
 })
 export class FiltersComponent {
 
+  private typingTimer: any;  // timer holder
+
   constructor(private state: WeatherStateService) {}
-  
-  onSearch(city: string, event: Event) {
-  event.preventDefault(); 
-    this.state.searchTerm.set(city);
+
+  onType(city: string) {
+    clearTimeout(this.typingTimer);      // reset timer
+    this.typingTimer = setTimeout(() => {
+      this.state.searchTerm.set(city);   // run search only after pause
+    }, 400);  // 400ms pause
+  }
+
+  onSubmit(e: Event) {
+    e.preventDefault();
   }
 }

@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-component',
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './navbar-component.html',
   styleUrls: ['./navbar-component.css']
 })
@@ -16,6 +16,7 @@ export class NavbarComponent {
   @ViewChild('navbarContent') navbarContent!: ElementRef;
   currentUnit: TemperatureUnit;
   currentTheme: string;
+  navbarOpen = false;
 
   constructor(
     private state: WeatherStateService,
@@ -52,11 +53,21 @@ export class NavbarComponent {
     this.closeNavbar();
   }
 
-  private closeNavbar() {
-    if (this.navbarContent.nativeElement.classList.contains('show')) {
-      this.navbarContent.nativeElement.classList.remove('show');
+  closeNavbar() {
+    const navbar = this.navbarContent.nativeElement;
+    this.navbarOpen = !this.navbarOpen;
+
+    if (navbar.classList.contains('show')) {
+      navbar.classList.add('closing');
+      navbar.classList.remove('toggler-fixed');
+
+      setTimeout(() => {
+        navbar.classList.remove('closing');
+        navbar.classList.remove('show');
+      }, 300);
     }
   }
+
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -64,4 +75,14 @@ export class NavbarComponent {
     const togglerClicked = (event.target as HTMLElement).closest('.navbar-toggler');
     if (!clickedInside && !togglerClicked) this.closeNavbar();
   }
+
+  toggleNavbar() {
+    console.log('Toggling navbar. Current state:', this.navbarOpen);
+    this.navbarOpen = !this.navbarOpen;
+    const navbar = this.navbarContent.nativeElement;
+    if (this.navbarOpen) {
+      navbar.classList.add('toggler-fixed');
+    } 
+  }
+
 }

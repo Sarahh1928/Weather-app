@@ -16,8 +16,7 @@
   <div *ngIf="state.themeMode() === 'dark'" class="shooting-stars-container">
   <div class="shooting-star" *ngFor="let star of shootingStars"
        [style.top.%]="star.top"
-       [style.left.%]="star.left"
-       [style.animation-delay]="star.delay + 's'">
+       [style.left.%]="star.left">
   </div>
 </div>
 

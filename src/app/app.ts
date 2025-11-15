@@ -24,6 +24,5 @@ export class App {
   shootingStars = Array.from({ length: 5 }, () => ({
     top: Math.random() * 40,       // top % position
     left: Math.random() * 100,     // left % position
-    delay: Math.random() * 5        // animation delay in seconds
   }));
 }

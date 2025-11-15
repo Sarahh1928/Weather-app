@@ -1,6 +1,5 @@
 .navbar-brand {
   font-size: 1.4rem;
-  color: #f1f5f9 !important;
 }
 
 @media (max-width: 991.98px) {
@@ -9,18 +8,36 @@
     top: 0;
     right: 0;
     height: 100vh;
-    width: 200px;
+    width: 70%;
     max-width: 80%;
-    padding: 2rem 1rem;
+    padding: 5rem 1rem;
     transform: translateX(100%); /* hidden initially */
     transition: transform 0.3s ease;
     z-index: 1050;
     box-shadow: -5px 0 15px rgba(0,0,0,0.3);
   }
 
+  .navbar-toggler.toggler-fixed{
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1100; /* above navbar */
+  }
+
+  .navbar-toggler.toggler-absolute{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1100; /* above navbar */
+  }
+
   /* Slide in when navbar is shown */
   .navbar-collapse.show {
     transform: translateX(0);
+  }
+  
+  .navbar-collapse.closing {
+    transform: translateX(100%); /* slide out */
   }
 
   /* Full-width inside sidebar */
@@ -28,6 +45,12 @@
   .navbar-collapse button {
     width: 100%;
     margin-bottom: 0.5rem;
+  }
+  
+  .navbar-collapse .d-flex.align-items-center {
+    width: auto;
+    margin-bottom: 0;
+    gap: 0.5rem; /* space between buttons */
   }
   /* Light theme */
   .navbar-toggler.light-toggler .navbar-toggler-icon {
@@ -37,5 +60,11 @@
   /* Dark theme */
   .navbar-toggler.dark-toggler .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23f1f5f9' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+  .nav-color-light {
+    background: var(--bg-gradient-light);  
+  }
+  .nav-color-dark {
+    background: var(--bg-gradient-dark);
   }
 }
