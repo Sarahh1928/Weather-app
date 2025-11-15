@@ -1,1 +1,91 @@
-/* You can add global styles to this file, and also import other style files */
+/* ================================
+   LIGHT MODE (DAY SKY)
+=================================== */
+:root {
+  --bg-gradient-light: linear-gradient(to bottom, #87ceeb, #bde9ff);
+  --bg-gradient-dark: radial-gradient(circle at top, #1a2350 0%, #0d132b 50%, #05060f 100%);
+  overflow-x: hidden;
+}
+
+body, :host {
+  background: var(--bg-gradient-light);
+  background-repeat: no-repeat;    /* prevent repetition */
+  background-attachment: fixed;    /* keeps gradient fixed while scrolling */
+  background-size: 100% 100%;      /* cover entire content height */
+  min-height: 100vh;               /* ensures gradient covers viewport */
+  position: relative;
+  color: #0b3d91;
+  transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================================
+   DARK MODE (NIGHT SKY)
+=================================== */
+.dark-mode {
+  background: var(--bg-gradient-dark);
+  color: #1e3a8a;
+  transition: background 0.5s ease, color 0.5s ease;
+  background-repeat: no-repeat;    /* prevent repetition */
+  background-attachment: fixed;    /* keeps gradient fixed while scrolling */
+  background-size: 100% 100%;      /* cover entire content height */
+  min-height: 100vh;               
+}
+
+/* Stars layer */
+.dark-mode::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, #ffffff80, transparent),
+    radial-gradient(2px 2px at 70% 80%, #ffffff80, transparent),
+    radial-gradient(1px 1px at 50% 60%, #ffffff50, transparent),
+    radial-gradient(1px 1px at 30% 90%, #ffffff50, transparent),
+    radial-gradient(1px 1px at 90% 20%, #ffffff30, transparent);
+  background-repeat: repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+/* Make all text inherit the theme color */
+.light-mode, .light-mode * {
+  color: #0b3d91 !important;
+}
+.light-mode .container, .light-mode .container * {
+  color: #0b3d91 !important;
+}
+.dark-mode .container, .dark-mode .container * {
+  color: #f1f5f9 !important; 
+}
+
+.light-mode .container .btn, .light-mode .container .btn * {
+    color: #ffffff !important;
+  background-color: #1D8BFF !important;
+}
+
+.dark-mode .container .btn, .dark-mode .container .btn * {
+  color: #f1f5f9 !important;
+  background-color: #6c63ff !important;
+}
+
+/* ===== Scrollbar Styling ===== */
+::-webkit-scrollbar {
+  width: 2px;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05); /* subtle track background */
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00bfff, #0078d7);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00d0ff, #0088ff);
+}

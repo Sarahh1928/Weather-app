@@ -1,0 +1,39 @@
+<div *ngIf="city()" class="city-details-container mt-4 p-4 rounded">
+  <h2 class="mb-4 fw-bold" [ngStyle]="{'color': themeService.themeMode() === 'light' ? '#0b3d91' : '#1e3a8a'}">{{ city()?.city }} Forecast</h2>
+
+  <!-- Week Switch -->
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+    <button class="btn mb-2" (click)="prevWeek()" [disabled]="weekOffset() === 0">
+      ◀ Previous
+    </button>
+    <span class="mb-2">Week {{ weekNumber() }}</span>
+    <button class="btn mb-2" (click)="nextWeek()">
+      Next ▶
+    </button>
+  </div>
+
+  <!-- Weekly Forecast Row -->
+  <div class="weekly-forecast d-flex flex-wrap gap-3 justify-content-start" [ngClass]="{
+      'forecast-light': themeService.themeMode() === 'light',
+      'forecast-dark': themeService.themeMode() === 'dark'
+    }">
+    <div *ngFor="let date of weekDates()" class="forecast-card text-center"
+     [ngClass]="{'selected-date': state.selectedDate() === date}">
+      <div class="forecast-date mb-2">{{ date | date:'EEE, MMM d' }}</div>
+      <ng-container *ngIf="forecastForDate(date) as f; else noData">
+        <div class="forecast-icon mb-2">
+          {{ getIcon(f.temperatureCelsius, f.humidity) }}
+        </div>
+        <div class="forecast-temp mb-1">🌡️ {{ displayTemperature(f) }}°</div>
+        <div class="forecast-humidity">💧 {{ f.humidity }}%</div>
+      </ng-container>
+      <ng-template #noData>
+        <div class="no-data">No data yet</div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!city()" class="mt-4">
+  <p>Loading city details...</p>
+</div>

@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <app-filters-component></app-filters-component>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let city of filteredCities()" [ngClass]="{
+        'card-bg-light': themeMode() === 'light', 'card-dark-mode': themeMode() === 'dark'
+      }">
+
+      <div class="card weather-card shadow-lg h-100 d-flex flex-column">
+
+        <div class="d-flex align-items-center px-3 pt-3">
+          <div class="weather-details flex-grow-1">
+            <h4 class="card-title fw-bold">{{ city.city }}</h4>
+
+            <ng-container *ngIf="latestWeather(city) as weather; else noData">
+              <p class="mb-0">
+                📅 <strong>{{ weather.date }}</strong><br>
+                🌡️ <strong>{{ displayTemperature(weather) }}°</strong><br>
+                💧 <strong>{{ weather.humidity }}%</strong>
+              </p>
+            </ng-container>
+
+            <ng-template #noData>
+              <div class=" py-1 my-0">
+                No weather data available.
+              </div>
+            </ng-template>
+          </div>
+
+          <!-- Weather Icon on Right -->
+          <div class="weather-icon" *ngIf="latestWeather(city) as weather;">
+            {{ getIcon(weather.temperatureCelsius, weather.humidity) }}
+          </div>
+        </div>
+
+        <!-- Button Full Width -->
+        <div class="mt-auto px-3 pb-3">
+          <a [routerLink]="['/city', city.id]" class="btn btn-sky w-100">
+            View Details
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="loading()" class="text-center my-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="!loading()&&cities().length === 0" class="text-center my-4">
+    <p>Failed to load cities. Try refreshing the page.</p>
+  </div>
+  <div *ngIf="!loading()&&filteredCities().length === 0&&cities().length > 0" class="text-center my-4">
+    <p>No cities match your search.</p>
+  </div>
+</div>

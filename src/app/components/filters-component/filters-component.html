@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-center mb-4">
+  <form class="d-flex w-100" style="max-width: 500px;" (submit)="onSearch(searchInput.value, $event)">
+    
+    <input
+      #searchInput
+      class="form-control form-control-lg me-2 rounded-pill shadow-sm"
+      type="search"
+      placeholder=" Search city..."
+    />
+
+    <button
+      class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm"
+      type="submit"
+    >
+      Search
+    </button>
+  </form>
+</div>

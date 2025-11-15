@@ -1,0 +1,43 @@
+/* 🌤 LIGHT MODE SKY STYLE */
+.weather-card {
+  background: linear-gradient(to bottom right, #cce9ff, #f2f9ff);
+  border: none;
+  border-radius: 20px;
+  padding-top: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+}
+
+.weather-icon {
+  font-size: 3.2rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.weather-details {
+  font-size: 1.1rem;
+}
+
+.btn-sky {
+  border: none;
+  border-radius: 12px;
+  padding: 8px;
+  transition: 0.25s;
+  margin-top: 0.5rem;
+}
+
+.btn-sky:hover {
+  transform: scale(1.03);
+}
+
+/*  DARK MODE */
+.card-dark-mode .weather-card {
+  background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+}
+
+.card-dark-mode .weather-icon {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}

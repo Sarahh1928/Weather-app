@@ -1,0 +1,45 @@
+.forecast-card {
+  border-radius: 16px;
+  padding: 10px;
+  flex: 1 1 calc(50% - 1rem);
+  min-width: 140px;
+  max-width: 200px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .forecast-card {
+    flex: 1 1 calc(14% - 1rem);
+  }
+}
+
+.forecast-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,50,0.1);
+}
+
+/* Light mode */
+.forecast-light .forecast-card {
+  background: linear-gradient(to bottom, #cce9ff, #f2f9ff);
+}
+
+/* Dark mode */
+.forecast-dark .forecast-card {
+  background: linear-gradient(to bottom, #1a1a2e, #16213e);
+}
+.forecast-dark .forecast-card:hover {
+  box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+}
+
+/* Icons, dates, temp, humidity */
+.forecast-icon {
+  font-size: 2rem;
+}
+.forecast-date {
+  font-weight: bold;
+}
+.selected-date {
+  border: 2px solid gold;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
